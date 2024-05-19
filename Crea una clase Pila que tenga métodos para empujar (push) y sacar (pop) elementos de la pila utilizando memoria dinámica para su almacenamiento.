@@ -1,0 +1,57 @@
+#include<iostream>
+#include<conio.h>
+
+using namespace std;
+
+struct Nodo{
+    int dato;
+    Nodo *siguiente;    
+};
+
+void agregarPila(Nodo *&, int);
+void sacarPila(Nodo *&, int &);
+
+int main(){
+    Nodo *pila = NULL;
+    int Numero1, Numero2, Numero3;
+
+    cout << "Agregar un numero: ";
+    cin >> Numero1;
+    agregarPila(pila, Numero1);
+
+    cout << "\nAgregar otro numero: ";
+    cin >> Numero2;
+    agregarPila(pila, Numero2);
+
+    cout << "\nAgregar un tercer numero: ";
+    cin >> Numero3;
+    agregarPila(pila, Numero3);
+
+    cout << "\nSacando elementos de la pila:" << endl;
+    while(pila != NULL){
+        sacarPila(pila, Numero1);
+        cout << Numero1 << " ";
+    }
+
+    getch();
+    return 0;
+}
+
+void agregarPila(Nodo *&pila, int n){
+    Nodo *nuevo_nodo = new Nodo();
+    nuevo_nodo->dato = n;
+    nuevo_nodo->siguiente = pila;
+    pila = nuevo_nodo;    
+    cout << "\nElemento " << n << " agregado a PILA" << endl;
+}
+
+void sacarPila(Nodo *&pila, int &n){
+   if(pila == NULL) {
+        cout << "La pila esta vacia " << endl;
+        return;
+    }
+    Nodo *aux = pila;
+    n = aux->dato;
+    pila = aux->siguiente;
+    delete aux;
+}
